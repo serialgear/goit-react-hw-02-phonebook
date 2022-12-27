@@ -1,32 +1,29 @@
-import { nanoid } from 'nanoid';
-import { ListBtn, ListItem } from './ContactList.styled';
 import PropTypes from 'prop-types';
+import { ContactItem } from 'components/ContactItem/ContactItem';
+import { ListWrapper } from './ContactList.styled';
 
 export const ContactList = ({ contacts, onClick }) => {
   return (
-    <ul>
-      {contacts.map(contact => {
-        return (
-          <ListItem key={nanoid()}>
-            <p>
-              {contact.name}: {contact.number}
-            </p>
-            <ListBtn
-              type="button"
-              onClick={() => {
-                onClick(contact.id);
-              }}
-            >
-              Delete
-            </ListBtn>
-          </ListItem>
-        );
-      })}
-    </ul>
+    <ListWrapper>
+      {contacts.map(({ id, name, number }) => (
+        <ContactItem
+          key={id}
+          id={id}
+          name={name}
+          number={number}
+          onClick={onClick}
+        />
+      ))}
+    </ListWrapper>
   );
 };
 
 ContactList.propTypes = {
-  state: PropTypes.object.isRequired,
+  contacts: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
   onClick: PropTypes.func.isRequired,
 };

@@ -47,7 +47,6 @@ export class App extends Component {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
-
   render() {
     return (
       <PhoneBookWrapper>

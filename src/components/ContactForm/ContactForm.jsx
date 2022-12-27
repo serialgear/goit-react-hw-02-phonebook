@@ -8,6 +8,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class ContactForm extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',
@@ -24,7 +30,7 @@ export class ContactForm extends Component {
     evt.preventDefault();
 
     this.props.onSubmit(this.state);
-    this.reset();
+    // this.reset();
   };
 
   reset = () => {
@@ -67,7 +73,3 @@ export class ContactForm extends Component {
     );
   }
 }
-ContactForm.propTypes = {
-  state: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
